@@ -12,8 +12,6 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->render('home/index.html.twig', [
-            'messageAccueil' => 'bienvenue sur Fouserie',
-        ]);
+        return $this->render('home/index.html.twig');
     }
 }
