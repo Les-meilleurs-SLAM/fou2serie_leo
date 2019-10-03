@@ -7,3 +7,6 @@ home:
 news:
     path: /news
     controller: App\Controller\NewsController::index
+serie:
+    path: /serie
+    controller: App\Controller\SerieController::index

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fou2Serie-Serie
+{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 1000px;
+            width: 95%;
+            font: 18px / 1.5 sans-serif;
+        }
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <h1 class="text-center">Série</h1>
+        <div class="card-deck">
+            {% for serie in LesSeries %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card mb-4">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="{{asset(serie.image)}}" alt="image de {{serie.titre}} ">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title text-center">{{serie.titre}}</h4>
+                            <div class="text-center">
+                                <a class="btn btn-primary" href="{{path('infoSerie',{'id':serie.id})}}">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

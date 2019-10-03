@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Serie;
+use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,11 +14,13 @@ class NewsController extends AbstractController
      */
     public function index()
     {
-        $dateDuJour='23/09/2019';
-        $nbNews='20';
-        return $this->render('news/index.html.twig', [
-            'dateDujour' => $dateDuJour,
-            'nbNews' => $nbNews,
+
+        $repository = $this->getDoctrine()->getRepository(Serie::class);
+        $LesNews = $repository->getListNews();
+        dump($LesNews);
+
+        return $this->render('news/news.html.twig', [
+            'lesNews' => $LesNews,
         ]);
     }
 }

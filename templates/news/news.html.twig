@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+{% block title %}Fou2Serie-News
+{% endblock %}
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px / 1.5 sans-serif;
+        }
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <h1 class="text-center">News</h1>
+        {% for news in lesNews %}
+            <!-- News jumbotron -->
+            <div
+                class="jumbotron text-center hoverable p-4">
+
+                <!-- Grid row -->
+                <div
+                    class="row">
+
+                    <!-- Grid column -->
+                    <div
+                        class="col-md-4 offset-md-1 mx-3 my-3">
+
+                        <!-- Featured image -->
+                        <div class="view overlay">
+                            <img src="{{news.image}}" class="img-fluid" alt="Sample image for first version of blog listing">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div
+                        class="col-md-7 text-md-left ml-3 mt-3">
+
+                        <!-- Excerpt -->
+                        <a href="#!" class="light-text">
+                            <h6 class="h6 pb-1">
+                                <i class="fas fa-desktop pr-1"></i>
+                                Série</h6>
+                        </a>
+
+                        <h4 class="h4 mb-4">{{news.titre}}</h4>
+
+                        <p class="font-weight-normal">{{news.resume| truncate(100, false, '...')}}</p>
+
+                        <p class="font-weight-normal">by
+                            <a>
+                                <strong>de la Roche Léo</strong>
+                            </a>,
+                            {{news.premierediffusion|date("d/m/Y")}}</p>
+                        <a href="{{path('infoSerie',{'id':news.id})}}" class="btn btn-primary">En savoir plus</a>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- News jumbotron -->
+        {% endfor %}
+
+    </div>
+{% endblock %}
