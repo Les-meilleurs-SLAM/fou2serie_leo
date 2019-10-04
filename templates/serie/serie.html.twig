@@ -16,7 +16,15 @@
             padding: 2px 6px;
         }
     </style>
-
+    <div class="text-right">
+        <button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">genres</button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{path('serie')}}">Toutes</a>
+            {% for genre in lesGenres %}
+                <a class="dropdown-item" href="{{path('SerieByGenre',{'id':genre.id})}}">{{genre.libelleGenre|capitalize}}</a>
+            {% endfor %}
+        </div>
+    </div>
     <div class="example-wrapper">
         <h1 class="text-center">Série</h1>
         <div class="card-deck">
