@@ -36,6 +36,12 @@
                 <p class="card-text">{{ serie.duree|date("d") }} jours et {{ serie.duree|date("H") }} heures.</p>
                 <h6>date de sortie</h6>
                 <p class="card-text">{{serie.premierediffusion|date("d/m/Y") }}</p>
+                <h6>Genre(s)</h6>
+                <p class="card-text">
+                {% for genre in lesGenres %}
+                    {{genre.libelleGenre |capitalize}}<br>
+                {% endfor %}
+                </p>
             </div>
         </div>
     </div>

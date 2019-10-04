@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use App\Entity\Serie;
 use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +13,10 @@ class SerieController extends AbstractController
     /**
      * @Route("/serie", name="serie")
      */
-    
+
     public function index()
     {
-        $LesSeries= $this->getDoctrine()->getRepository(Serie::class)->findBy(array(),array('titre' => 'ASC'));
+        $LesSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
 
         return $this->render('serie/serie.html.twig', [
             'LesSeries' => $LesSeries,
@@ -26,13 +27,19 @@ class SerieController extends AbstractController
      */
     public function getInfo($id)
     {
-        dump($id);
-        $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $UneSeries = $repository->find($id);
+        $repositorySerie = $this->getDoctrine()->getRepository(Serie::class);
+        $UneSeries = $repositorySerie->find($id);
+        $idGenres = $UneSeries->getGenres();
+        $lesGenres=array();
+        $i=0;
+        foreach ($idGenres as $unGenre) {
+            $lesGenres[$i] = $this->getDoctrine()->getRepository(Genre::class)->find($unGenre);
+            $i++;
+        }
 
         return $this->render('serie/infoSerie.html.twig', [
             'serie' => $UneSeries,
+            "lesGenres" => $lesGenres,
         ]);
     }
 }
-

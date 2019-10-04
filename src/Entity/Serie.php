@@ -23,7 +23,6 @@ class Serie
         return $this->lesGenres;
     }
 
-
     public function addGenre(Categorie $genre)
     {
         $this->lesGenres[] = $genre;

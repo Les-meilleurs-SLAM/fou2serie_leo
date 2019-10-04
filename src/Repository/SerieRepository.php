@@ -56,5 +56,6 @@ class SerieRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    
 
 }
