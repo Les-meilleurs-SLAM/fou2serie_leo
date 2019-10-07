@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Genre;
 use App\Entity\Serie;
-use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class SerieController extends AbstractController
 {
@@ -14,13 +16,14 @@ class SerieController extends AbstractController
      * @Route("/serie", name="serie")
      */
 
-    public function index()
+    public function index(Request $request, PaginatorInterface $paginator)
     {
         $LesSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
-        $lesGenres= $this->getDoctrine()->getRepository(Genre::class)->findAll();
+        $lesGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
+        $Series = $paginator->paginate($LesSeries, $request->query->getInt('page', 1), 6);
 
         return $this->render('serie/serie.html.twig', [
-            'LesSeries' => $LesSeries,
+            'LesSeries' => $Series,
             'lesGenres' => $lesGenres,
         ]);
     }
@@ -42,14 +45,15 @@ class SerieController extends AbstractController
     /**
      * @Route("/serie/{id}", name="SerieByGenre")
      */
-    public function goGenre($id)
+    public function goGenre($id,Request $request, PaginatorInterface $paginator)
     {
         $repositoryGenre = $this->getDoctrine()->getRepository(Genre::class)->find($id);
-        $lesSeries=$repositoryGenre->getSeries();
-        $lesGenres= $this->getDoctrine()->getRepository(Genre::class)->findAll();
+        $lesSeries = $repositoryGenre->getSeries();
+        $Series = $paginator->paginate($lesSeries, $request->query->getInt('page', 1), 6);
+        $lesGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
 
         return $this->render('serie/serie.html.twig', [
-            'LesSeries' => $lesSeries,
+            'LesSeries' => $Series,
             'lesGenres' => $lesGenres,
         ]);
     }
