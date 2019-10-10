@@ -31,11 +31,13 @@
                     </h4>
                     <h6>résumé</h6>
                     <p class="card-text">{{serie.resume}}</p>
-                    <h6>duréé</h6>
-                    <p class="card-text">{{ serie.duree|date("d") }}
-                        jours et
-                        {{ serie.duree|date("H") }}
-                        heures.</p>
+                    <h6>duréé moyenne d'un épisode</h6>
+                    <p class="card-text">{{ serie.duree|date("i") }}
+                        minutes
+                    </p>
+                    <h6>duréé totale de la série</h6>
+                    <p class="card-text">{{ tempsTotal}}
+                        minutes</p>
                     <h6>date de sortie</h6>
                     <p class="card-text">{{serie.premierediffusion|date("d/m/Y") }}</p>
                     <h6>Genre(s)</h6>

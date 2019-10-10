@@ -34,18 +34,20 @@ class SerieController extends AbstractController
     {
         $repositorySerie = $this->getDoctrine()->getRepository(Serie::class);
         $UneSeries = $repositorySerie->find($id);
+        $tempsTotal = $UneSeries->getDureeTotale();
+        dump($tempsTotal);
         $lesGenres = $UneSeries->getGenres();
-        dump($lesGenres);
 
         return $this->render('serie/infoSerie.html.twig', [
             'serie' => $UneSeries,
             "lesGenres" => $lesGenres,
+            "tempsTotal" => $tempsTotal,
         ]);
     }
     /**
      * @Route("/serie/{id}", name="SerieByGenre")
      */
-    public function goGenre($id,Request $request, PaginatorInterface $paginator)
+    public function goGenre($id, Request $request, PaginatorInterface $paginator)
     {
         $repositoryGenre = $this->getDoctrine()->getRepository(Genre::class)->find($id);
         $lesSeries = $repositoryGenre->getSeries();

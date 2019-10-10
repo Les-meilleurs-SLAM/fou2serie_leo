@@ -74,6 +74,11 @@ class Serie
      */
     private $video;
 
+        /**
+     * @ORM\Column(type="integer", length=10, nullable=true)
+     */
+    private $nbEpisode;
+
 
 
     public function getId(): ?int
@@ -178,4 +183,24 @@ class Serie
 
         return $this;
     }
+
+    public function getNbEpisode(): ?int
+    {
+        return $this->nbEpisode;
+    }
+
+    public function setNbEpisode(?int $nbEpisode): self
+    {
+        $this->nbEpisode = $nbEpisode;
+
+        return $this;
+    }
+
+    public function getDureeTotale()
+    {
+        $tempsTotal= $this->getNbEpisode()*(date_timestamp_get($this->getDuree())/60);
+
+        return $tempsTotal;
+    }
+
 }
