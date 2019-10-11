@@ -35,13 +35,16 @@ class SerieController extends AbstractController
         $repositorySerie = $this->getDoctrine()->getRepository(Serie::class);
         $UneSeries = $repositorySerie->find($id);
         $tempsTotal = $UneSeries->getDureeTotale();
+        $heuresTotal=floor($tempsTotal/60);
+        $minutesTotal=$tempsTotal%60;
         dump($tempsTotal);
         $lesGenres = $UneSeries->getGenres();
 
         return $this->render('serie/infoSerie.html.twig', [
             'serie' => $UneSeries,
             "lesGenres" => $lesGenres,
-            "tempsTotal" => $tempsTotal,
+            "heuresTotal" => $heuresTotal,
+            "minutesTotal" => $minutesTotal,
         ]);
     }
     /**

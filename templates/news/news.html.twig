@@ -72,6 +72,8 @@
             </div>
             <!-- News jumbotron -->
         {% endfor %}
-
+        <div class="navigation d-flex justify-content-center">
+            {{ knp_pagination_render(lesNews) }}
+        </div>
     </div>
 {% endblock %}
