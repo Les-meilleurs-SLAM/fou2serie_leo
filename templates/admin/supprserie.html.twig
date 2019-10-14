@@ -19,8 +19,12 @@
 
     <div class="example-wrapper">
 
-        {{ form_start(form) }}
-        {{ form_end(form) }}
+<h1>Etes vous sur de vouloir supprimer ?</h1>
+<div class="text-center">
+    <a class="btn btn-primary" href="{{path('confirme',{'id':serie.id})}}">oui</a>
+    <a class="btn btn-primary" href="{{path('serie')}}">non</a>
+</div>
+
 
     </div>
 {% endblock %}
