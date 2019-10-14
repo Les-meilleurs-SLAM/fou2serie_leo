@@ -10,3 +10,6 @@ news:
 serie:
     path: /serie
     controller: App\Controller\SerieController::index
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
