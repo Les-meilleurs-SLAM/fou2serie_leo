@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
 use App\Form\SerieType;
+use App\Form\GenreType;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -81,16 +83,38 @@ class AdminController extends AbstractController
     /**
      * @Route("/confirme/{id}", name="confirme")
      */
-    public function confirme($id)
+    public function confirme($id, Request $request)
     {
-        $uneSerie = new Serie;
+        $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
+        $submittedToken = $request->request->get('_token');
+        if ($this->isCsrfTokenValid($laSerie->getId(), $submittedToken)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($laSerie);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('admin');
 
-        $repositorySerie = $this->getDoctrine()->getRepository(Serie::class);
-        $uneSerie = $repositorySerie->find($id);
-        $return = $this->getDoctrine()->getManager();
-        $return->remove($uneSerie);
-        $return->flush();
+    }
+    
 
-        return $this->redirectToRoute('serie');
+        /**
+     * @Route("/ajoutgenre", name="ajoutGenre")
+     */
+    public function ajoutGenre(Request $request)
+    {
+        $unGenre = new Genre;
+
+        $form = $this->createForm(GenreType::class, $unGenre);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $return = $this->getDoctrine()->getManager();
+            $return->persist($unGenre);
+            $return->flush();
+            return $this->redirectToRoute('serie');
+        }
+        return $this->render('admin/ajoutserie.html.twig', [
+            'serie' => $unGenre,
+            'form' => $form->createView(),
+        ]);
     }
 }

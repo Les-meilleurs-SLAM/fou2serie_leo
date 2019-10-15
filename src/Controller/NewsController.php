@@ -20,7 +20,6 @@ class NewsController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Serie::class);
         $LesNews = $repository->findAll();
         $news = $paginator->paginate($LesNews, $request->query->getInt('page', 1), 4);
-        dump($LesNews);
 
         return $this->render('news/news.html.twig', [
             'lesNews' => $news,

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fou2Serie-Admin
+{% block title %}Fou2Serie-ajout
 {% endblock %}
 
 {% block body %}
@@ -18,17 +18,8 @@
     </style>
 
     <div class="example-wrapper">
-
-<h1 class="text-center">Etes vous sur de vouloir supprimer ?</h1>
-<div class="text-center">
-<form action="{{path('confirme',{'id':serie.id})}}" method="POST">
-    <input type="hidden" name="_token" value="{{csrf_token(serie.id)}}">
-    <button class="btn btn-primary" type="submit">oui</button>
-</form>
-
-    <a class="btn btn-primary" href="{{path('serie')}}">non</a>
-</div>
-
-
+        <h1>Administration</h1>
+                {{ form_start(form) }}
+        {{ form_end(form) }}
     </div>
 {% endblock %}
