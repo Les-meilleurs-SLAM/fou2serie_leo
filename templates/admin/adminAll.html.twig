@@ -21,16 +21,19 @@
   
             <h3 class="text-center">Administration</h3>
             <div class="text-center">
-                <a class="btn btn-primary col-12" href="{{path('ajoutSerie')}}">Nouvelle Serie</a>
-                <a class="btn btn-primary col-12" href="{{path('ajoutGenre')}}">Nouveau Genre</a>
+                <a class="btn btn-primary col-lg-6 col-sm-12" href="{{path('ajoutSerie')}}">Nouvelle Serie</a>
+                <a class="btn btn-primary col-lg-6 col-sm-12" href="{{path('ajoutGenre')}}">Nouveau Genre</a>
             </div>
 
 
         <ul class="list-group">
             {% for serie in lesSeries %}
-                <li class="list-group-item align-items-center">{{serie.titre}}
-                    <a style="float:right;"  class="btn btn-primary" href="{{path('editAdmin',{'id':serie.id})}}" role="button">editer</a>
-                    <a style="float:right;" class="btn btn-primary" href="{{path('suppSerie',{'id':serie.id})}}" role="button">Supprimer</a>
+                <li class="list-group-item d-flex justify-content-between">
+                {{serie.titre}}
+                <div>
+                    <a class="btn btn-primary" href="{{path('editAdmin',{'id':serie.id})}}" role="button">editer</a>
+                    <a class="btn btn-primary" href="{{path('suppSerie',{'id':serie.id})}}" role="button">Supprimer</a>
+                </div>
                 </li>
             {% endfor %}
         </ul>
