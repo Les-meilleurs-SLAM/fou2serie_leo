@@ -1,4 +1,8 @@
 framework:
+    assets:
+        base_urls:
+            - 'http://192.168.2.4/~cdudit/fouDeSerieInProdV2/'
+
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
     #http_method_override: true

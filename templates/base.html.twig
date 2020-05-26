@@ -8,13 +8,18 @@
             {% endblock %}
         </title>
         {% block stylesheets %}{% endblock %}
+        {{ encore_entry_link_tags('app') }}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" rel="stylesheet">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.full.min.js"></script>
+        {{ encore_entry_script_tags('app') }}
     </head>
 
     <body>
@@ -34,18 +39,31 @@
                     <a class="nav-item nav-link active" href="{{ path('admin') }}">Admin
                         <span class="sr-only">(current)</span>
                     </a>
+                    <a class="nav-item nav-link active" href="{{ path('stats') }}">Stats
+                        <span class="sr-only">(current)</span>
+                    </a>
+                    <a class="nav-item nav-link active" href="{{ path('search_serie') }}">Rechercher une série
+                        <span class="sr-only">(current)</span>
+                    </a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="nav-item nav-link active" href="{{ path('security_logout') }}">Déconnexion
+                        <span class="sr-only">(current)</span>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
+            <span class="navbar-text">
+                <a class="nav-item nav-link" href="http://www.clement-dudit.fr" target="_blank">© 2020 Copyright: clement-dudit.fr
+                    <span class="sr-only">(current)</span>
+                </a>
+            </span>
         </nav>
         {% block body %}
         {% endblock%}
-
-        <footer class="page-footer primary-color">
-            <div class="footer-copyright text-center py-3">© 2019 Copyright:
-                <a href="https://www.leo-dlr.fr" target="_blank">
-                    leo-dlr.fr</a>
-            </div>
-        </footer>
+        <script type="text/javascript">
+        $(document).ready(() => {
+        $('select').select2();
+        })
+        </script>
     </body>
-
 </html>

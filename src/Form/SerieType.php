@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 
 class SerieType extends AbstractType
 {
@@ -20,7 +20,9 @@ class SerieType extends AbstractType
             ->add('titre')
             ->add('resume')
             ->add('duree')
-            ->add('premiereDiffusion')
+            ->add('premiereDiffusion', TypeDateType::class, array(
+                'years' => range(date('Y') - 20, date('Y') + 5)
+            ))
             ->add('image')
             ->add('video')
             ->add('nbEpisode')
@@ -32,7 +34,7 @@ class SerieType extends AbstractType
                 },
                 'choice_label' => 'libelleGenre',
                 'multiple' => true, // permet la sélection multiple
-                'expanded'=>true,
+                //'expanded' => true, pour ne pas avoir de cases à cocher
             ))
             ->add('Sauvegarder', SubmitType::class, [
                 'attr' => [

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="container my-5 px-0 z-depth-1">
+  <section class="p-5 my-md-5 text-center" 
+    style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background.jpg); background-size: cover; background-position: center center;">
+    <div class="my-5 mx-md-5">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-body">
+              <form class="text-center" style="color: #757575;" method="POST">
+                <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Connexion</h3>
+                <input type="text" id="inputUsername" value="{{lastUsername}}" name="_username" class="form-control mb-4" placeholder="ID" required autofocus>
+                <input type="password" id="inputPassword" name="_password" class="form-control" placeholder="Mot de passe" required>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-outline-orange btn-rounded my-4 waves-effect">Se connecter</button>
+                </div>
+              </form>
+                {% if errors %}
+                    <div class="alert alert-danger">
+                        {{errors}}
+                    </div>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+{% endblock %}

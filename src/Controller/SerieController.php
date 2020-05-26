@@ -18,7 +18,7 @@ class SerieController extends AbstractController
 
     public function index(Request $request, PaginatorInterface $paginator)
     {
-        $LesSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
+        $LesSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array('estVue' => 0), array('titre' => 'ASC'));
         $lesGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         $Series = $paginator->paginate($LesSeries, $request->query->getInt('page', 1), 6);
 
@@ -35,8 +35,8 @@ class SerieController extends AbstractController
         $repositorySerie = $this->getDoctrine()->getRepository(Serie::class);
         $UneSeries = $repositorySerie->find($id);
         $tempsTotal = $UneSeries->getDureeTotale();
-        $heuresTotal=floor($tempsTotal/60);
-        $minutesTotal=$tempsTotal%60;
+        $heuresTotal = floor($tempsTotal / 60);
+        $minutesTotal = $tempsTotal % 60;
         dump($tempsTotal);
         $lesGenres = $UneSeries->getGenres();
 

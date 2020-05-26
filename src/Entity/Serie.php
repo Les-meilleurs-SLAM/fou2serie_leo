@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Genre;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SerieRepository")
@@ -25,12 +26,12 @@ class Serie
         return $this->lesGenres;
     }
 
-    public function addGenre(Categorie $genre)
+    public function addGenre(Genre $genre)
     {
         $this->lesGenres[] = $genre;
     }
 
-    public function removeGenre(Categorie $genre)
+    public function removeGenre(Genre $genre)
     {
         // removeElement est une méthode de la classe ArrayCollection
         $this->lesGenres->removeElement($genre);
@@ -74,10 +75,15 @@ class Serie
      */
     private $video;
 
-        /**
+    /**
      * @ORM\Column(type="integer", length=10, nullable=true)
      */
     private $nbEpisode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $estVue;
 
 
 
@@ -198,9 +204,19 @@ class Serie
 
     public function getDureeTotale()
     {
-        $tempsTotal= $this->getNbEpisode()*(date_timestamp_get($this->getDuree())/60);
-
+        $tempsTotal = $this->getNbEpisode() * (date_timestamp_get($this->getDuree()) / 60);
         return $tempsTotal;
     }
 
+    public function getEstVue(): ?bool
+    {
+        return $this->estVue;
+    }
+
+    public function setEstVue(bool $estVue): self
+    {
+        $this->estVue = $estVue;
+
+        return $this;
+    }
 }

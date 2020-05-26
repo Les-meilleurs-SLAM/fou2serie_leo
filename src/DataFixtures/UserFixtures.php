@@ -1,0 +1,31 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\User;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+class UserFixtures extends Fixture
+{
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
+    public function load(ObjectManager $manager)
+    {
+        $user = new User();
+        $user->setUsername('test');
+        // la méthode encodePassword prend en 1er paramètre une classe qui implémente UserInterface
+        // c'est bien le cas de notre classe $user
+        // le 2ème paramètre est le mot de passe en clair 
+        $passChiffre = $this->encoder->encodePassword($user, "test");
+        $user->setPassword($passChiffre);
+        $manager->persist($user);
+        $manager->flush();
+    }
+}

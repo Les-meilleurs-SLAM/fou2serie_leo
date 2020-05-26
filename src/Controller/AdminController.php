@@ -19,11 +19,28 @@ class AdminController extends AbstractController
     public function index()
     {
         $LesSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
-
         return $this->render('admin/adminAll.html.twig', [
             'lesSeries' => $LesSeries,
         ]);
     }
+
+    /**
+     * @Route("/estVue/{idSerie}", name="estVue")
+     */
+    public function estVue($idSerie)
+    {
+        $repositorySerie = $this->getDoctrine()->getRepository(Serie::class);
+        $laSerie = $repositorySerie->find($idSerie);
+        if ($laSerie->getEstVue()) {
+            $laSerie->setEstVue(false);
+        } else {
+            $laSerie->setEstVue(true);
+        }
+        $return = $this->getDoctrine()->getManager();
+        $return->flush();
+        return $this->redirectToRoute('admin');
+    }
+
     /**
      * @Route("/editAdmin/{id}", name="editAdmin")
      */
@@ -44,6 +61,7 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/ajoutserie", name="ajoutSerie")
      */
@@ -93,11 +111,10 @@ class AdminController extends AbstractController
             $entityManager->flush();
         }
         return $this->redirectToRoute('admin');
-
     }
-    
 
-        /**
+
+    /**
      * @Route("/ajoutgenre", name="ajoutGenre")
      */
     public function ajoutGenre(Request $request)

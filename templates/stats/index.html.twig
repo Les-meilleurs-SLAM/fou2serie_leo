@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+  <section class="dark-grey-text">
+    <h3 class="text-center font-weight-bold mb-4 pb-2">Statistiques</h3>
+    <hr class="w-header">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <a href="#!" class="card hoverable">
+          <div class="card-body">
+          	<div class="media">
+              <span class="card-img-100 d-inline-flex justify-content-center align-items-center rounded-circle grey lighten-3 mr-4">
+                <i class="fas fa-video fa-2x"></i>
+              </span>
+              <div class="media-body">
+                <h5 class="dark-grey-text mb-3">Nombres de séries vues</h5>
+                <p class="font-weight-light text-muted mb-0">{{nbSerieVues}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <a href="#!" class="card hoverable">
+          <div class="card-body">
+          	<div class="media">
+              <span class="card-img-100 d-inline-flex justify-content-center align-items-center rounded-circle grey lighten-3 mr-4">
+                <i class="far fa-hourglass-half fa-2x"></i>
+              </span>
+              <div class="media-body">
+                <h5 class="dark-grey-text mb-3">Durée totale des séries vues</h5>
+                <p class="font-weight-light text-muted mb-0">{{tpsTotal}} minutes</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <a href="#!" class="card hoverable">
+          <div class="card-body">
+          	<div class="media">
+              <span class="card-img-100 d-inline-flex justify-content-center align-items-center rounded-circle grey lighten-3 mr-4">
+                <i class="fas fa-play fa-2x"></i>
+              </span>
+              <div class="media-body">
+                <h5 class="dark-grey-text mb-3">Nombre de séries à voir</h5>
+                <p class="font-weight-light text-muted mb-0">{{nbAutresSeries}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+	</section>
+</div>
+{% endblock %}
